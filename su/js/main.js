@@ -5,61 +5,52 @@ const fs = require("fs");
 const loca = require('./local');
 const url = require('url');
 const qs   = require('querystring');
-
+var readImage = require("./readImages.js")
 
 http.createServer((req,res)=>{
 
-  var path = url.parse(req.url).pathname;
+  console.log(req.url);
+ var path = url.parse(req.url).pathname;
   var path1 = path.split('/');
   var path2 = path1.slice(2);
-  var path3 = "/"+path2.join('/');
-  console.log("我是path：",path);
-  console.log("我是path1",path3);
+  var path3 = "../"+path2.join('/');
+ // console.log("我是path：",path);
+ // console.log("我是path1",path3);
   var dirpath = __dirname+path;
   var dirpath1 = dirpath.split('.')[1];
-  console.log("dirpath1",dirpath1);
+ // console.log("dirpath1",dirpath1);
   var dirpathh = dirpath.split('/',4);
   var dirpathhh = dirpathh.join('/')
-  console.log("我是外面dirpath:",dirpath);
-  console.log("我是外面dirpathh:",dirpathh);
-  console.log("我是外面dirpathhh:",dirpathhh);
+ // console.log("我是外面dirpath:",dirpath);
+ // console.log("我是外面dirpathh:",dirpathh);
+  //console.log("我是外面dirpathhh:",dirpathhh);
   var dirlast = dirpathhh+"/"+path3;
-  console.log(dirlast);
+ // console.log(dirlast);
+ console.log(dirpath1);
   switch(dirpath1){
+    
       case 'css':
-          fs.readFile(path3,'utf-8',function(err,data){
-             res.writeHead(200,{"Content-type":"text/css;charset=UTF-8"});
-             res.end(data);   
-             console.log("css");        
-          });
-          break;
+            var data=fs.readFileSync(path3);
+            res.writeHead(200,{"Content-type":"text/css,charset=UTF-8"});
+            res.end(data);           
+                
+        break;
       case 'jpg':
-          fs.readFile(path3,'utf-8',function(err,data){
+            var data=fs.readFileSync(path3);
             res.writeHead(200,{"Content-type":"image/jpeg;charset=UTF-8"});
-            res.end(data);           
-         });
-         break;
-         
-      case 'jpeg':
-          fs.readFile(path3,'utf-8',function(err,data){
-            res.writeHead(200,{"Content-type":"image/jpeg;charset=UTF-8"});
-            res.end(data);           
-         });
-         break;
-          
+             res.end(data); 
+             break;
       case 'js':
-          fs.readFile(path3,'utf-8',function(err,data){
-            res.writeHead(200,{"Content-type":"application/x-javascript;charset=UTF-8"});
+           var data = fs.readFileSync(path3);
+             res.writeHead(200,{"Content-type":"application/x-javascript;charset=UTF-8"});
             res.end(data);           
-         });
-          break;
-      default:
-          break;
+              
+        break;
   }
   if(path =='/list/'){
-       fs.readFile("../images/1-1.jpg",'utf-8',function(err,data){
-         console.log("我是dirpath:"+dirpath);
-          res.writeHead(200,{"Content-type":"image/jpeg;charset=UTF-8"});
+       fs.readFile("../chapterList.html",'utf-8',function(err,data){
+         //console.log("我是dirpath:"+dirpath);
+          res.writeHead(200,{"Content-type":"text/html;charset=UTF-8"});
           res.end(data);      
           
     });
@@ -90,4 +81,6 @@ http.createServer((req,res)=>{
       
   }
 
-}).listen(8003);
+}).listen(8080);
+
+
