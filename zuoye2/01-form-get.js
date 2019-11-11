@@ -13,11 +13,11 @@ http.createServer((req,res)=>{
   //console.log(req.headers);
  // console.log('');
 
-  console.log(req.url);
+  //console.log(req.url);
   var path = url.parse(req.url).pathname;
   var path1 = path.split('/');
   var path2;
-  console.log(path1.length);
+  //console.log(path1.length);
 
     path2 = path1.slice(2);
 
@@ -25,9 +25,9 @@ http.createServer((req,res)=>{
 
   var path3 = "./"+path2.join('/');
   var path5 = path2.join('/');
-  //console.log("我是path：",path);
-  //console.log("我是path1:",path1);
-  //console.log("我是path2：",path2);
+  console.log("我是path：",path);
+  console.log("我是path1:",path1);
+  console.log("我是path2：",path2);
   console.log("我是path3",path3);
   var length = path2.length;
   
@@ -93,8 +93,8 @@ switch(dirpath1){
    // console.log("2222222",url.parse(req.url));
    //// var cc = url.parse(req.url).search;
    // console.log("11111111111",cc);
-    var data = fs.readFileSync("./chapter.html");
-    res.writeHead(200,{"Content-type":"text/html;charset=UTF-8"});
+    //var data = fs.readFileSync("./chapter.html");
+    //res.writeHead(200,{"Content-type":"text/html;charset=UTF-8"});
    // var cc = url.parse(req.url).search;
    // console.log("444444444444",url.parse(req.url))
    // console.log("3333333333333333",req.url);
@@ -109,7 +109,14 @@ switch(dirpath1){
       res.end(body);
       return ;
     }*/
-        res.end(data);    
+       // res.end(data); 
+        fs.readFile("./chapter.html",function(err,data){
+                      res.writeHead(200,{"Content-type":"text/html;charset=UTF-8"});
+                                        res.end(data);
+                                                              
+                                            
+        });
+        console.log("接下来是chapter.html了，啦啦啦啦啦啦了");
   }
 
 

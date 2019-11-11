@@ -40,8 +40,9 @@
 <script>
     $(document).ready(function() {
         var search = window.location.search;
+        console.log("我是search",search);
         var chapterId = search.substr(search.indexOf("=") + 1);
-        $.get("192.168.112.144:8080/getDetail?chapterId=" + chapterId, function(data) {
+        $.get("192.168.112.144:8080/list/getDetail?chapterId=1", function(data) {
             var dataObj = JSON.parse(data);
             $("#title").html(dataObj[0]["chapterName"]);
             $("#publish").html(dataObj[0]["publishTimer"]);
