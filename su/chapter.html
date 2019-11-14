@@ -1,6 +1,4 @@
-﻿<!doctype html>
-<html>
-<head>
+﻿<!DOVTYPE html>
 <link href="css/base.css" rel="stylesheet">
 <link href="css/new.css" rel="stylesheet">
 </head>
@@ -10,7 +8,7 @@
   <div class="index_about">
     <h2 class="c_titile" id="title">生活是什么？</h2>
     <p class="box_c">
-    	<span class="d_time">发布时间：<span id="publish">2015-11-16 10:42</span></span>
+      <span class="d_time">发布时间：<span id="publish">2015-11-16 10:42</span></span>
         <span>编辑：<span id="author">admin</span></span>
         <span>互动QQ群：<a>1234567</a>
        <span>浏览次数：<span id="views">12</span></span>
@@ -27,7 +25,7 @@
     
    </ul>
     <div class="keybq">
-    	<p><span>关键字词</span>：生活,无奈,努力,生存</p>
+      <p><span>关键字词</span>：生活,无奈,努力,生存</p>
     </div>
     
     <div class="ad"> </div>
@@ -41,23 +39,21 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     $(document).ready(function() {
-        var search = window.location.search;
-        console.log("我是search",search);
-        var chapterId = search.substr(search.indexOf("=") + 1);
-<<<<<<< HEAD
-        $.get("192.168.112.144:8080/list/getDetail?chapterId=1", function(data) {
-=======
-        console.log(chapterId);
-        $.get("http://localhost:8003/list/getDetail?chapterId=1" + chapterId, function(data) {
->>>>>>> 4a09de6e07c9ebee52c8c69513b660b6a0989ff3
+        var mm = window.location.search;
+        var chapterId = mm.split('?')[1];
+        //$.post("/list/getDetail?chapterId=" +chapterId)
+
+        
+        $.get("/list/getDetail?chapterId=" +chapterId, function(data) {
+            console.log(data);
             var dataObj = JSON.parse(data);
-            console.log(chapterName);
-            $("#title").html(dataObj[0]["chapterName"]);
-            $("#publish").html(dataObj[0]["publishTimer"]);
-            $("#author").html(dataObj[0]["author"]);
-            $("#views").html(dataObj[0]["views"]);
-            $("#content").html(dataObj[0]["chapterContent"]);
+            $("#title").html(dataObj.chapterName);
+            $("#publish").html(dataObj.publishTimer);
+            $("#author").html(dataObj.author);
+            $("#views").html(dataObj.views);
+            $("#content").html(dataObj.chapterContent);
         })
     })
 </script>
 </html>
+

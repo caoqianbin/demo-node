@@ -115,12 +115,10 @@
                             </tr>
                         </thead>
 
-                        <tbody id="result"></tbody>
+                        <tbody id="result">
 
-
-
-
-                        <tr>
+            
+                     <tr>
                             <td>
                                 109
                             </td>
@@ -190,7 +188,7 @@
                                         213
                                     </td>
                         </tr>
-                        <tr>
+                        <tr id= "re">
                                     <td>
                                         109
                                     </td>
@@ -204,6 +202,7 @@
                                         213
                                     </td>
                         </tr>
+                      </tbody>
                     </table>
         </div>
     </div>
@@ -212,6 +211,19 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
-   
+$(document).ready(function(){
+    $.get("/list/listmm",function(data){
+      console.log("11111111");
+      console.log(data);
+      var dataObj = JSON.parse(data);
+      var data1 = dataObj.split("&");
+      var data2 = data1[0].split("=")[1];
+      var data3 = data1[1].split("=")[1];
+      console.log(dataObj);
+      console.log(dataObj[0]);
+      var str = "<tr><td></td><td>"+data2+"</td><td>"+data3+"</td><td></td></tr>";
+      $("#result").append(str);
+      })
+    })
 </script>
 </html>

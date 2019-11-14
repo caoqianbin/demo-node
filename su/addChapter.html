@@ -66,7 +66,7 @@
         .right {
             border: 1px solid white;
             margin-left: 250px;
-            background: url(./bg.jpg) repeat;
+             
         }
         nav {
             width: 100%;
@@ -166,8 +166,8 @@
         <div class="right">
             <div class="chapter">
                 <input type="text"  placeholder="文章标题"  class="editor_textfield editor_title ui_textfield j_title j_topic_sug_input normal-prefix" name="title" autocomplete="off" id="title">
-                <div class="content" contenteditable="true" id="ct"></div>
-                <button class="el-button login-btn-submit el-button--primary" id="sub">提交</button>
+                <div class="content" contenteditable="true" name="tt" id="ct"></div>
+                <button type="submit" class="el-button login-btn-submit el-button--primary" id="sub">提交</button>
             </div>
         </div>
     </div>
@@ -177,11 +177,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     function showList() {
-        window.location = "http://localhost:8083/listmanager/"
+        window.location = "http://192.168.112.144:8080/listmanager/"
     }
     $("#sub").click(function() {
-        $.post("http://localhost:8083/add", {"title": $("#title").val(), "content": $("#ct").html()}, function(data) {
-            window.location = "http://localhost:8083/listmanager/"
+        console.log(window.location);
+        $.post("/add", {"title": $("#title").val(), "content": $("#ct").html()}, function(data) {
+            window.location = "http://192.168.112.144:8080/listmanager/"
         })
     })
 </script>
